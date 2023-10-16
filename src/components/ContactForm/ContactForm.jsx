@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Input, Button, Form } from './ContactForm.styled';
+import { Input, Form } from './ContactForm.styled';
+import Button from '@mui/joy/Button';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
 import { getContacts } from 'redux/selectors';
