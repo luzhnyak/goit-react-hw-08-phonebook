@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from 'redux/filterSlice';
 import { getFilter } from 'redux/selectors';
 import { FilterInput } from './Filter.styled';
+import { TextField } from '@mui/material';
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,11 @@ export const Filter = () => {
   };
 
   return (
-    <FilterInput
+    <TextField
+      variant="outlined"
+      fullWidth
+      margin="normal"
+      label="Filter"
       type="text"
       name="filter"
       placeholder="Find contacts by name"

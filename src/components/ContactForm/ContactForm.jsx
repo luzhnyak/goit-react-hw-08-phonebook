@@ -1,17 +1,22 @@
 import { useState } from 'react';
 import { Input, Form } from './ContactForm.styled';
-import Button from '@mui/joy/Button';
+import Button from '@mui/material/Button';
+import SaveIco from '@mui/icons-material/Save';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/operations';
+// import { addContact } from 'redux/operations';
 import { getContacts } from 'redux/selectors';
 import toast from 'react-hot-toast';
+import { useAddContactMutation } from 'redux/contactsAPI';
+import { LoadingButton } from '@mui/lab';
+import { TextField } from '@mui/material';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const contacts = useSelector(getContacts);
+  const [addContact, addInfo] = useAddContactMutation();
 
   const isNameHas = name => {
     return contacts.some(contact => contact.name === name);
@@ -40,43 +45,57 @@ export const ContactForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    if (isNameHas(name)) {
-      toast.error(`${name} is already in contacts.`);
-      return;
-    }
+    // if (isNameHas(name)) {
+    //   toast.error(`${name} is already in contacts.`);
+    //   return;
+    // }
 
-    dispatch(addContact({ name, number }));
+    addContact({ name, number });
 
     reset();
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <label>
-        Name
-        <Input
-          type="text"
-          name="name"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          required
-          value={name}
-          onChange={event => handleChange(event.target)}
-        />
-      </label>
-      <label>
-        Number
-        <Input
-          type="tel"
-          name="number"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
-          required
-          value={number}
-          onChange={event => handleChange(event.target)}
-        />
-      </label>
-      <Button type="submit">Add contact</Button>
-    </Form>
+    <form onSubmit={handleSubmit}>
+      <TextField
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        label="Name"
+        type="text"
+        name="name"
+        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+        pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+        required
+        value={name}
+        onChange={event => handleChange(event.target)}
+      />
+
+      <TextField
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        label="Phone"
+        type="tel"
+        name="number"
+        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+        pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
+        required
+        value={number}
+        onChange={event => handleChange(event.target)}
+      />
+
+      <LoadingButton
+        variant="contained"
+        margin="normal"
+        type="submit"
+        color="success"
+        loading={addInfo.isLoading}
+        loadingPosition="end"
+        endIcon={<SaveIco />}
+      >
+        Add contact
+      </LoadingButton>
+    </form>
   );
 };
