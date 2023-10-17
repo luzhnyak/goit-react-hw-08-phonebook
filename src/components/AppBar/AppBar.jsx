@@ -11,9 +11,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import ContactsIcon from '@mui/icons-material/Contacts';
-
+import { NavLink } from 'react-router-dom';
+import { FaPhoneSquare } from 'react-icons/fa';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -37,15 +37,15 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="success">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <ContactsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={NavLink}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -88,19 +88,20 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map(page => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <NavLink to="login">
+                <Typography textAlign="center">Login</Typography>
+              </NavLink>
+              <NavLink to="register">
+                <Typography textAlign="center">Register</Typography>
+              </NavLink>
             </Menu>
           </Box>
           <ContactsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={NavLink}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -112,10 +113,24 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            PhoneBook
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map(page => (
+            <Button
+              to="login"
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              component={NavLink}
+            >
+              Login
+            </Button>
+            <Button
+              to="register"
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              component={NavLink}
+            >
+              Register
+            </Button>
+            {/* {pages.map(page => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -123,7 +138,7 @@ function ResponsiveAppBar() {
               >
                 {page}
               </Button>
-            ))}
+            ))} */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -162,7 +177,6 @@ function ResponsiveAppBar() {
 }
 export default ResponsiveAppBar;
 
-// import { FaPhoneSquare } from 'react-icons/fa';
 // import { Header } from './AppBar.styled';
 
 // export const AppBar = () => {

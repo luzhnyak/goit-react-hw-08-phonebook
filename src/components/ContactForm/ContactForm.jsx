@@ -9,7 +9,7 @@ import { getContacts } from 'redux/selectors';
 import toast from 'react-hot-toast';
 import { useAddContactMutation } from 'redux/contactsAPI';
 import { LoadingButton } from '@mui/lab';
-import { TextField } from '@mui/material';
+import { Box, TextField } from '@mui/material';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -56,46 +56,48 @@ export const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        label="Name"
-        type="text"
-        name="name"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        required
-        value={name}
-        onChange={event => handleChange(event.target)}
-      />
+    <Box m={1}>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          label="Name"
+          type="text"
+          name="name"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          required
+          value={name}
+          onChange={event => handleChange(event.target)}
+        />
 
-      <TextField
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        label="Phone"
-        type="tel"
-        name="number"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
-        required
-        value={number}
-        onChange={event => handleChange(event.target)}
-      />
+        <TextField
+          variant="outlined"
+          fullWidth
+          margin="normal"
+          label="Phone"
+          type="tel"
+          name="number"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          pattern="\+?\d{1,4}?[\-.\s]?\(?\d{1,3}?\)?[\-.\s]?\d{1,4}[\-.\s]?\d{1,4}[\-.\s]?\d{1,9}"
+          required
+          value={number}
+          onChange={event => handleChange(event.target)}
+        />
 
-      <LoadingButton
-        variant="contained"
-        margin="normal"
-        type="submit"
-        color="success"
-        loading={addInfo.isLoading}
-        loadingPosition="end"
-        endIcon={<SaveIco />}
-      >
-        Add contact
-      </LoadingButton>
-    </form>
+        <LoadingButton
+          variant="contained"
+          margin="normal"
+          type="submit"
+          color="success"
+          loading={addInfo.isLoading}
+          loadingPosition="end"
+          endIcon={<SaveIco />}
+        >
+          Add contact
+        </LoadingButton>
+      </form>
+    </Box>
   );
 };
