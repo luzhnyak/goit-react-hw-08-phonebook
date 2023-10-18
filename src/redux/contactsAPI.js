@@ -7,10 +7,7 @@ export const contactsApi = createApi({
     baseUrl: 'https://connections-api.herokuapp.com',
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
-      console.log('token');
-      console.log(getState());
       const token = getState().auth.token;
-      console.log(token);
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }

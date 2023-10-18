@@ -28,13 +28,3 @@ const authReducer = authSlice.reducer;
 
 export const persistedReducer = persistReducer(persistConfig, authReducer);
 export const { setCredentials } = authSlice.actions;
-
-// export const store = configureStore({
-//   reducer: persistedReducer,
-//   middleware: getDefaultMiddleware =>
-//     getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       },
-//     }),
-// });

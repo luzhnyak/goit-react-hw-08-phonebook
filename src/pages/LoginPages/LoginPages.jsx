@@ -6,11 +6,14 @@ import React from 'react';
 import { useLoginMutation } from 'redux/authAPI';
 import { setCredentials } from 'redux/authSlice';
 import { useDispatch } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const LoginPages = () => {
   const [login, { isLoading }] = useLoginMutation();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   return (
     <Box m={1}>
       <Formik
@@ -33,13 +36,9 @@ const LoginPages = () => {
             token: data.token,
             isLoginIn: true,
           };
-          //   console.log(credentials);
+
           dispatch(setCredentials(credentials));
-          //   getCurrentUser();
-          //   setTimeout(() => {
-          //     alert(JSON.stringify(values, null, 2));
-          //     setSubmitting(false);
-          //   }, 400);
+          navigate('/');
         }}
       >
         {({
@@ -91,6 +90,8 @@ const LoginPages = () => {
           </form>
         )}
       </Formik>
+      <p>Don't have au acount?</p>
+      <NavLink to="/register">Registration</NavLink>
     </Box>
   );
 };
