@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Input, Form } from './ContactForm.styled';
-import Button from '@mui/material/Button';
+// import { Input, Form } from './ContactForm.styled';
+// import Button from '@mui/material/Button';
 import SaveIco from '@mui/icons-material/Save';
 
-import { useDispatch, useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 // import { addContact } from 'redux/operations';
-import { getContacts } from 'redux/selectors';
-import toast from 'react-hot-toast';
+// import { getContacts } from 'redux/selectors';
+// import toast from 'react-hot-toast';
 import { useAddContactMutation } from 'redux/contactsAPI';
 import { LoadingButton } from '@mui/lab';
 import { Box, TextField } from '@mui/material';
@@ -15,12 +15,12 @@ export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(getContacts);
+  // const contacts = useSelector(getContacts);
   const [addContact, addInfo] = useAddContactMutation();
 
-  const isNameHas = name => {
-    return contacts.some(contact => contact.name === name);
-  };
+  // const isNameHas = name => {
+  //   return contacts.some(contact => contact.name === name);
+  // };
 
   const handleChange = ({ name, value }) => {
     switch (name) {
@@ -40,7 +40,7 @@ export const ContactForm = () => {
     setNumber('');
   };
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleSubmit = event => {
     event.preventDefault();

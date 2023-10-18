@@ -4,6 +4,7 @@ import { Filter } from 'components/Filter/Filter';
 import { Loader } from 'components/Loader/Loader';
 import React, { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+
 import { useGetContactsQuery } from 'redux/contactsAPI';
 
 const HomePage = () => {

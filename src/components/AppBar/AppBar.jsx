@@ -13,8 +13,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import ContactsIcon from '@mui/icons-material/Contacts';
 import { NavLink } from 'react-router-dom';
-import { FaPhoneSquare } from 'react-icons/fa';
-const pages = ['Products', 'Pricing', 'Blog'];
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from 'redux/selectors';
+import { useEffect } from 'react';
+import { setCredentials } from 'redux/authSlice';
+import { useGetCurrentUserQuery } from 'redux/authAPI';
+// import { FaPhoneSquare } from 'react-icons/fa';
+// const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -35,6 +40,19 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const user = useGetCurrentUserQuery();
+  const { name } = useSelector(getUser);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(user);
+    if (!user.data) return;
+    const credentials = {
+      name: user.data.name,
+      isLoginIn: true,
+    };
+    dispatch(setCredentials(credentials));
+  }, [user, dispatch]);
 
   return (
     <AppBar position="static" color="success">
@@ -56,7 +74,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            PhoneBook
+            {name}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

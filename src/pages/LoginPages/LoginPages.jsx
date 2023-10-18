@@ -3,11 +3,14 @@ import { Box, TextField } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { Formik } from 'formik';
 import React from 'react';
-import { useGetCurrentUserQuery, useLoginMutation } from 'redux/authAPI';
+import { useLoginMutation } from 'redux/authAPI';
+import { setCredentials } from 'redux/authSlice';
+import { useDispatch } from 'react-redux';
 
 const LoginPages = () => {
   const [login, { isLoading }] = useLoginMutation();
-  //   const [getCurrentUser, info] = useGetCurrentUserQuery();
+
+  const dispatch = useDispatch();
   return (
     <Box m={1}>
       <Formik
@@ -23,8 +26,15 @@ const LoginPages = () => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          login(values);
+        onSubmit={async (values, { setSubmitting }) => {
+          const { data } = await login(values);
+          const credentials = {
+            name: data.user.name,
+            token: data.token,
+            isLoginIn: true,
+          };
+          //   console.log(credentials);
+          dispatch(setCredentials(credentials));
           //   getCurrentUser();
           //   setTimeout(() => {
           //     alert(JSON.stringify(values, null, 2));
