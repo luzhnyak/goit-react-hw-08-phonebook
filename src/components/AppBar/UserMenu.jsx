@@ -7,33 +7,19 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-// import { useEffect } from 'react';
 import { setCredentials } from 'redux/authSlice';
 import { useLogoutMutation } from 'redux/authAPI';
 import { getUser } from 'redux/selectors';
-import { useNavigate } from 'react-router-dom';
 
 const UserMenu = () => {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
   const { name } = useSelector(getUser);
-  //   const user = useGetCurrentUserQuery();
 
   const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
-  const navigate = useNavigate();
-
-  //   useEffect(() => {
-  //     console.log(user);
-  //     if (!token) return;
-  //     const credentials = {
-  //       name: user.data.name,
-  //       isLoginIn: true,
-  //     };
-  //     dispatch(setCredentials(credentials));
-  //   }, [dispatch]);
 
   const handleOpenUserMenu = event => {
     setAnchorElUser(event.currentTarget);
@@ -49,12 +35,11 @@ const UserMenu = () => {
     const credentials = {
       name: null,
       token: null,
-      isLoginIn: false,
+      isLoggedIn: false,
+      isRefreshing: false,
     };
 
     dispatch(setCredentials(credentials));
-
-    navigate('/login');
   };
   return (
     <Box sx={{ flexGrow: 0 }}>

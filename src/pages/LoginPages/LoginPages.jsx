@@ -6,13 +6,29 @@ import React from 'react';
 import { useLoginMutation } from 'redux/authAPI';
 import { setCredentials } from 'redux/authSlice';
 import { useDispatch } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const LoginPages = () => {
   const [login, { isLoading }] = useLoginMutation();
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  const handleSubmit = async values => {
+    try {
+      const { data } = await login(values);
+      const credentials = {
+        name: data.user.name,
+        token: data.token,
+        isLoggedIn: true,
+      };
+
+      dispatch(setCredentials(credentials));
+    } catch (error) {
+      toast.error('The email or password is incorrect!');
+    }
+  };
 
   return (
     <Box m={1}>
@@ -29,16 +45,8 @@ const LoginPages = () => {
           }
           return errors;
         }}
-        onSubmit={async (values, { setSubmitting }) => {
-          const { data } = await login(values);
-          const credentials = {
-            name: data.user.name,
-            token: data.token,
-            isLoginIn: true,
-          };
-
-          dispatch(setCredentials(credentials));
-          navigate('/');
+        onSubmit={values => {
+          handleSubmit(values);
         }}
       >
         {({

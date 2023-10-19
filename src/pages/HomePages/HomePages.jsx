@@ -2,15 +2,15 @@ import { useSelector } from 'react-redux';
 import { getUser } from 'redux/selectors';
 
 import { ContactForm } from 'components/ContactForm/ContactForm';
-import { ContactList } from 'components/ContactList/ContactList';
+import { ContactsList } from 'components/Contacts/ContactsList';
 
 const HomePage = () => {
-  const { isLoginIn } = useSelector(getUser);
+  const { isLoggedIn } = useSelector(getUser);
 
   return (
     <>
-      {isLoginIn && <ContactForm />}
-      {isLoginIn && <ContactList />}
+      {isLoggedIn && <ContactForm />}
+      {isLoggedIn && <ContactsList />}
     </>
   );
 };

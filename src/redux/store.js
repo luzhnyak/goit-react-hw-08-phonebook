@@ -16,10 +16,10 @@ import {
 
 export const store = configureStore({
   reducer: {
-    [authApi.reducerPath]: authApi.reducer,
-    [contactsApi.reducerPath]: contactsApi.reducer,
     auth: persistedReducer,
     filter: filterReducer,
+    [authApi.reducerPath]: authApi.reducer,
+    [contactsApi.reducerPath]: contactsApi.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { getFilter } from 'redux/selectors';
-import { Contact } from 'components/Contact/Contact';
+import { Contact } from 'components/Contacts/Contact';
 // import { Ul } from './ContactsList.styled';
 import { useGetContactsQuery } from 'redux/contactsAPI';
 
@@ -18,7 +18,7 @@ const getFilteredContacts = (contacts, filter) => {
   );
 };
 
-export const ContactList = () => {
+export const ContactsList = () => {
   const { data: contacts, isLoading, error } = useGetContactsQuery();
   const filter = useSelector(getFilter);
   const filteredContacts = getFilteredContacts(contacts, filter);

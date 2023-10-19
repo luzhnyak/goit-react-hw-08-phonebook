@@ -14,12 +14,12 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getUser } from 'redux/selectors';
 
-import UserMenu from 'components/UserMenu/UserMenu';
+import UserMenu from 'components/AppBar/UserMenu';
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
-  const { name, isLoginIn } = useSelector(getUser);
+  const { name, isLoggedIn } = useSelector(getUser);
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
@@ -52,43 +52,45 @@ function ResponsiveAppBar() {
             PhoneBook
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              <MenuItem component={NavLink} to="login">
-                <Typography textAlign="center">Login</Typography>
-              </MenuItem>
-              <MenuItem component={NavLink} to="register">
-                <Typography textAlign="center">Register</Typography>
-              </MenuItem>
-            </Menu>
-          </Box>
+          {!isLoggedIn && (
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                <MenuItem component={NavLink} to="login">
+                  <Typography textAlign="center">Login</Typography>
+                </MenuItem>
+                <MenuItem component={NavLink} to="register">
+                  <Typography textAlign="center">Register</Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+          )}
 
           <ContactsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
@@ -109,22 +111,28 @@ function ResponsiveAppBar() {
           >
             PhoneBook
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              to="login"
-              sx={{ my: 2, color: 'white', display: 'block' }}
-              component={NavLink}
-            >
-              Login
-            </Button>
-            <Button
-              to="register"
-              sx={{ my: 2, color: 'white', display: 'block' }}
-              component={NavLink}
-            >
-              Register
-            </Button>
+            {!isLoggedIn && (
+              <>
+                <Button
+                  to="login"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  component={NavLink}
+                >
+                  Login
+                </Button>
+                <Button
+                  to="register"
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                  component={NavLink}
+                >
+                  Register
+                </Button>
+              </>
+            )}
           </Box>
+
           <Typography
             variant="h6"
             noWrap
@@ -140,7 +148,7 @@ function ResponsiveAppBar() {
           >
             {name}
           </Typography>
-          {isLoginIn && <UserMenu />}
+          {isLoggedIn && <UserMenu />}
         </Toolbar>
       </Container>
     </AppBar>

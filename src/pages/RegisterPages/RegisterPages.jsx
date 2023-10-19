@@ -4,9 +4,30 @@ import SendIcon from '@mui/icons-material/Send';
 import { Formik } from 'formik';
 import React from 'react';
 import { useAddUserMutation } from 'redux/authAPI';
+import { setCredentials } from 'redux/authSlice';
+import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 
 const RegisterPages = () => {
   const [addUser, { isLoading }] = useAddUserMutation();
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = async values => {
+    try {
+      const { data } = await addUser(values);
+      const credentials = {
+        name: data.user.name,
+        token: data.token,
+        isLoggedIn: true,
+      };
+
+      dispatch(setCredentials(credentials));
+    } catch (error) {
+      toast.error('The email or password is incorrect!');
+    }
+  };
+
   return (
     <Box m={1}>
       <Formik
@@ -22,12 +43,8 @@ const RegisterPages = () => {
           }
           return errors;
         }}
-        onSubmit={(values, { setSubmitting }) => {
-          addUser(values);
-          //   setTimeout(() => {
-          //     alert(JSON.stringify(values, null, 2));
-          //     setSubmitting(false);
-          //   }, 400);
+        onSubmit={values => {
+          handleSubmit(values);
         }}
       >
         {({

@@ -3,7 +3,8 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
 const authInitialState = {
-  isLoginIn: false,
+  isLoggedIn: false,
+  isRefreshing: false,
   token: '',
   name: '',
 };
