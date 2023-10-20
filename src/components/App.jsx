@@ -22,17 +22,28 @@ export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (user.error) {
+      dispatch(
+        setCredentials({
+          token: null,
+          isRefreshing: false,
+          isLoggedIn: false,
+          name: null,
+        })
+      );
+    }
+  }, [user.error, dispatch]);
+
+  useEffect(() => {
     if (!token || !user.isSuccess) return;
 
-    const credentials = {
-      name: user.data.name,
-      isLoggedIn: true,
-      isRefreshing: false,
-    };
-
-    if (user.error) console.log(user.error);
-
-    dispatch(setCredentials(credentials));
+    dispatch(
+      setCredentials({
+        name: user.data.name,
+        isLoggedIn: true,
+        isRefreshing: false,
+      })
+    );
   }, [user, token, skip, dispatch]);
 
   useEffect(() => {

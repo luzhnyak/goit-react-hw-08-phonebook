@@ -28,7 +28,7 @@ export const authApi = createApi({
           body,
         };
       },
-      invalidatesTags: ['User'],
+      // invalidatesTags: ['User'],
     }),
     login: builder.mutation({
       query: body => {
@@ -38,7 +38,7 @@ export const authApi = createApi({
           body,
         };
       },
-      invalidatesTags: ['User'],
+      // invalidatesTags: ['User'],
     }),
     logout: builder.mutation({
       query: () => {

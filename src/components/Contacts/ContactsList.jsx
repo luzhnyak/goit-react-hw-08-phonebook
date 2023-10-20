@@ -36,8 +36,8 @@ export const ContactsList = () => {
   return (
     <>
       {isLoading && <Loader />}
-      {!isLoading && contacts.length > 1 && <Filter />}
-      {!isLoading && contacts.length < 1 && <Empty />}
+      {!isLoading && contacts?.length > 1 && <Filter />}
+      {!isLoading && contacts?.length < 1 && <Empty />}
       {!isLoading && contacts && (
         <Demo>
           <List component="ul">
