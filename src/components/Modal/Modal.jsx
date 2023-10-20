@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { ContactForm } from 'components/ContactForm/ContactForm';
+import { ContactForm } from 'components/Contacts/ContactForm';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpenModal } from 'redux/modalSlice';

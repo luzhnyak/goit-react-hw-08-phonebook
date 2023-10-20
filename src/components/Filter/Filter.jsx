@@ -23,6 +23,7 @@ export const Filter = () => {
       placeholder="Find contacts by name"
       value={filter}
       onChange={handleFilterChange}
+      color="success"
     />
   );
 };

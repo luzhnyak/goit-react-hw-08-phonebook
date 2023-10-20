@@ -1,5 +1,5 @@
 import HomePage from 'pages/HomePages/HomePages';
-import { SharedLayout } from './SharedLayout/SharedLayout';
+import { SharedLayout } from './SharedLayout';
 import { Route, Routes } from 'react-router-dom';
 import NotFound from 'pages/NotFound/NotFound';
 import LoginPages from 'pages/LoginPages/LoginPages';
@@ -20,14 +20,15 @@ export const App = () => {
 
   useEffect(() => {
     if (!token || !user.isSuccess) return;
-    console.log(user);
+
     const credentials = {
       name: user.data.name,
       isLoggedIn: true,
       isRefreshing: false,
     };
+
     dispatch(setCredentials(credentials));
-  }, [user, token, dispatch]);
+  }, [user, token, skip, dispatch]);
 
   useEffect(() => {
     if (token && skip) {

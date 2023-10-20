@@ -38,7 +38,7 @@ export const ContactsList = () => {
       {!isLoading && contacts && <Filter />}
       {!isLoading && contacts && (
         <Demo>
-          <List component="nav" aria-label="mailbox folders">
+          <List component="ul">
             {filteredContacts?.map(contact => (
               <Contact
                 id={contact.id}

@@ -1,5 +1,5 @@
 import { LoadingButton } from '@mui/lab';
-import { Box, TextField } from '@mui/material';
+import { Box, TextField, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { Formik } from 'formik';
 import React from 'react';
@@ -16,6 +16,7 @@ const RegisterPages = () => {
   const handleSubmit = async values => {
     try {
       const { data } = await addUser(values);
+
       const credentials = {
         name: data.user.name,
         token: data.token,
@@ -30,6 +31,13 @@ const RegisterPages = () => {
 
   return (
     <Box m={1}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{ marginTop: '16px', color: 'green' }}
+      >
+        Register
+      </Typography>
       <Formik
         initialValues={{ name: '', email: '', password: '' }}
         validate={values => {
@@ -49,12 +57,9 @@ const RegisterPages = () => {
       >
         {({
           values,
-          errors,
-          touched,
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting,
           /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
@@ -68,7 +73,9 @@ const RegisterPages = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.name}
+              color="success"
             />
+
             <TextField
               variant="outlined"
               fullWidth
@@ -79,8 +86,9 @@ const RegisterPages = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
+              color="success"
             />
-            {/* {errors.email && touched.email && errors.email} */}
+
             <TextField
               variant="outlined"
               fullWidth
@@ -91,19 +99,27 @@ const RegisterPages = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
-            />
-            {/* {errors.password && touched.password && errors.password} */}
-            <LoadingButton
-              variant="contained"
-              margin="normal"
-              type="submit"
               color="success"
-              loading={isLoading}
-              loadingPosition="end"
-              endIcon={<SendIcon />}
+            />
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                marginTop: '16px',
+              }}
             >
-              Register
-            </LoadingButton>
+              <LoadingButton
+                variant="contained"
+                margin="normal"
+                type="submit"
+                color="success"
+                loading={isLoading}
+                loadingPosition="end"
+                endIcon={<SendIcon />}
+              >
+                Register
+              </LoadingButton>
+            </Box>
           </form>
         )}
       </Formik>

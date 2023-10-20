@@ -34,7 +34,6 @@ function ResponsiveAppBar() {
   };
 
   const handleOpenModal = () => {
-    console.log('openModal');
     dispatch(setOpenModal(true));
   };
 

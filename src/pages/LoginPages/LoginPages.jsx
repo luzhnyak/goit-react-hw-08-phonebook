@@ -1,5 +1,5 @@
 import { LoadingButton } from '@mui/lab';
-import { Box, TextField } from '@mui/material';
+import { Box, Link, TextField, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { Formik } from 'formik';
 import React from 'react';
@@ -13,7 +13,6 @@ const LoginPages = () => {
   const [login, { isLoading }] = useLoginMutation();
 
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
   const handleSubmit = async values => {
     try {
@@ -32,6 +31,13 @@ const LoginPages = () => {
 
   return (
     <Box m={1}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{ marginTop: '16px', color: 'green' }}
+      >
+        Login
+      </Typography>
       <Formik
         initialValues={{ email: '', password: '' }}
         validate={values => {
@@ -51,12 +57,10 @@ const LoginPages = () => {
       >
         {({
           values,
-          errors,
-          touched,
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting,
+
           /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
@@ -70,8 +74,9 @@ const LoginPages = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
+              color="success"
             />
-            {/* {errors.email && touched.email && errors.email} */}
+
             <TextField
               variant="outlined"
               fullWidth
@@ -82,24 +87,37 @@ const LoginPages = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
-            />
-            {/* {errors.password && touched.password && errors.password} */}
-            <LoadingButton
-              variant="contained"
-              margin="normal"
-              type="submit"
               color="success"
-              loading={isLoading}
-              loadingPosition="end"
-              endIcon={<SendIcon />}
+            />
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                marginTop: '16px',
+              }}
             >
-              Login
-            </LoadingButton>
+              <LoadingButton
+                variant="contained"
+                margin="normal"
+                type="submit"
+                color="success"
+                loading={isLoading}
+                loadingPosition="end"
+                endIcon={<SendIcon />}
+              >
+                Login
+              </LoadingButton>
+            </Box>
           </form>
         )}
       </Formik>
-      <p>Don't have au acount?</p>
-      <NavLink to="/register">Registration</NavLink>
+      <Box sx={{ textAlign: 'center', marginTop: '24px', color: 'green' }}>
+        <Typography variant="h6">Don't have an acount?</Typography>
+
+        <Link component={NavLink} to="/register" sx={{ color: 'green' }}>
+          Registration here
+        </Link>
+      </Box>
     </Box>
   );
 };

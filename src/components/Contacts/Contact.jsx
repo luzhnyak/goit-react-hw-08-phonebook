@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LoadingButton from '@mui/lab/LoadingButton';
 import PersonIcon from '@mui/icons-material/Person';
-import { Link } from '@mui/material';
+import { Link, Paper } from '@mui/material';
 
 export const Contact = ({ id, name, number }) => {
   const [deleteContact, deleteInfo] = useDeleteContactMutation();
@@ -21,6 +21,7 @@ export const Contact = ({ id, name, number }) => {
 
   return (
     <ListItem
+      components={Paper}
       secondaryAction={
         <LoadingButton
           edge="end"
@@ -29,10 +30,12 @@ export const Contact = ({ id, name, number }) => {
           title={`Delete ${name}`}
           loading={deleteInfo.isLoading}
           variant="outlined"
+          color="success"
         >
           <DeleteIcon />
         </LoadingButton>
       }
+      // sx={{ borderBottom: '1px solid lightGreen' }}
     >
       <ListItemAvatar>
         <Avatar sx={{ backgroundColor: getRandomHexColor() }}>
@@ -42,21 +45,15 @@ export const Contact = ({ id, name, number }) => {
       <ListItemText
         primary={name}
         secondary={
-          <Link href={'tel:' + number} underline="hover">
+          <Link
+            href={'tel:' + number}
+            underline="hover"
+            sx={{ color: 'green' }}
+          >
             {number}
           </Link>
         }
       />
     </ListItem>
-    // <Item>
-    //   <FaUserCircle size="40px" color={getRandomHexColor()} />
-    //   <div>
-    //     <Name>{name}</Name>
-    //     <Number href={'tel:' + number}>{number}</Number>
-    //   </div>
-    //   <IconButton type="button" onClick={handleDelete} title={`Delete ${name}`}>
-    //     <FaTimes />
-    //   </IconButton>
-    // </Item>
   );
 };
