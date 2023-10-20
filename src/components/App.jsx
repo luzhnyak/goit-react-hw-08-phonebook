@@ -1,8 +1,8 @@
-import { lazy, useEffect, useState } from 'react';
+import { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useGetCurrentUserQuery } from 'redux/authAPI';
+import { useGetCurrentUserQuery } from 'redux/api';
 import { getUser } from 'redux/selectors';
 import { setCredentials } from 'redux/authSlice';
 
@@ -16,9 +16,8 @@ const RegisterPages = lazy(() => import('pages/RegisterPages/RegisterPages'));
 const NotFound = lazy(() => import('pages/NotFound/NotFound'));
 
 export const App = () => {
-  const [skip, setSkip] = useState(true);
-  const user = useGetCurrentUserQuery(null, { skip });
   const { token } = useSelector(getUser);
+  const user = useGetCurrentUserQuery(null, { skip: !Boolean(token) });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,14 +43,7 @@ export const App = () => {
         isRefreshing: false,
       })
     );
-  }, [user, token, skip, dispatch]);
-
-  useEffect(() => {
-    if (token && skip) {
-      setSkip(false);
-      dispatch(setCredentials({ isRefreshing: true }));
-    }
-  }, [token, skip, dispatch]);
+  }, [user, token, dispatch]);
 
   return (
     <Routes>

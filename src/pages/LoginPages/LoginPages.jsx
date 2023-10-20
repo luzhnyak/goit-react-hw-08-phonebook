@@ -3,7 +3,7 @@ import { Box, Link, TextField, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { Formik } from 'formik';
 import React from 'react';
-import { useLoginMutation } from 'redux/authAPI';
+import { useLoginMutation } from 'redux/api';
 import { setCredentials } from 'redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';

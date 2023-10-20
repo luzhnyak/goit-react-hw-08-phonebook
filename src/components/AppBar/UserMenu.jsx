@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setCredentials } from 'redux/authSlice';
-import { useLogoutMutation } from 'redux/authAPI';
+import { useLogoutMutation } from 'redux/api';
 import { getUser } from 'redux/selectors';
 
 const UserMenu = () => {

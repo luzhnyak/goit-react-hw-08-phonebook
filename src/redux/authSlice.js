@@ -4,7 +4,7 @@ import { persistReducer } from 'redux-persist';
 
 const authInitialState = {
   isLoggedIn: false,
-  isRefreshing: false,
+  isRefreshing: true,
   token: '',
   name: '',
 };

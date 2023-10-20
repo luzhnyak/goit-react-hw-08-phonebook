@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { getFilter } from 'redux/selectors';
 import { Contact } from 'components/Contacts/Contact';
 // import { Ul } from './ContactsList.styled';
-import { useGetContactsQuery } from 'redux/contactsAPI';
+import { useGetContactsQuery } from 'redux/api';
 
 import { styled } from '@mui/material/styles';
 // import Box from '@mui/material/Box';

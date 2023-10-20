@@ -1,4 +1,4 @@
-import { useDeleteContactMutation } from 'redux/contactsAPI';
+import { useDeleteContactMutation } from 'redux/api';
 
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
