@@ -12,7 +12,7 @@ export const SharedLayout = () => {
 
   return (
     <div>
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" disableGutters>
         <ResponsiveAppBar />
         {isRefreshing ? (
           <Loader />
