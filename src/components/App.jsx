@@ -34,15 +34,23 @@ export const App = () => {
   }, [user.error, dispatch]);
 
   useEffect(() => {
-    if (!token || !user.isSuccess) return;
+    if (user.isFetching) {
+      dispatch(
+        setCredentials({
+          isRefreshing: true,
+        })
+      );
+    }
 
-    dispatch(
-      setCredentials({
-        name: user.data.name,
-        isLoggedIn: true,
-        isRefreshing: false,
-      })
-    );
+    if (token && user.isSuccess) {
+      dispatch(
+        setCredentials({
+          name: user.data.name,
+          isLoggedIn: true,
+          isRefreshing: false,
+        })
+      );
+    }
   }, [user, token, dispatch]);
 
   return (
