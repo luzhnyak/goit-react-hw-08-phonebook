@@ -30,6 +30,8 @@ export const App = () => {
       isRefreshing: false,
     };
 
+    if (user.error) console.log(user.error);
+
     dispatch(setCredentials(credentials));
   }, [user, token, skip, dispatch]);
 
