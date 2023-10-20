@@ -1,16 +1,19 @@
-import HomePage from 'pages/HomePages/HomePages';
-import { SharedLayout } from './SharedLayout';
+import { lazy, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import NotFound from 'pages/NotFound/NotFound';
-import LoginPages from 'pages/LoginPages/LoginPages';
-import RegisterPages from 'pages/RegisterPages/RegisterPages';
-import { useEffect, useState } from 'react';
-import { useGetCurrentUserQuery } from 'redux/authAPI';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { useGetCurrentUserQuery } from 'redux/authAPI';
 import { getUser } from 'redux/selectors';
 import { setCredentials } from 'redux/authSlice';
+
+import { SharedLayout } from './SharedLayout';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
+
+const HomePage = lazy(() => import('pages/HomePages/HomePages'));
+const LoginPages = lazy(() => import('pages/LoginPages/LoginPages'));
+const RegisterPages = lazy(() => import('pages/RegisterPages/RegisterPages'));
+const NotFound = lazy(() => import('pages/NotFound/NotFound'));
 
 export const App = () => {
   const [skip, setSkip] = useState(true);

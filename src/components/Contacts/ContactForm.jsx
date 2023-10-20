@@ -61,7 +61,7 @@ export const ContactForm = () => {
               required
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.name}
+              value={values.name || ''}
             />
 
             <TextField
@@ -76,7 +76,7 @@ export const ContactForm = () => {
               required
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.number}
+              value={values.number || ''}
             />
             <Box
               sx={{

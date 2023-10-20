@@ -11,6 +11,7 @@ import { Filter } from 'components/Filter/Filter';
 import { Loader } from 'components/Loader';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
+import Empty from './Empty';
 
 const getFilteredContacts = (contacts, filter) => {
   return contacts?.filter(contact =>
@@ -35,7 +36,8 @@ export const ContactsList = () => {
   return (
     <>
       {isLoading && <Loader />}
-      {!isLoading && contacts && <Filter />}
+      {!isLoading && contacts.length > 1 && <Filter />}
+      {!isLoading && contacts.length < 1 && <Empty />}
       {!isLoading && contacts && (
         <Demo>
           <List component="ul">
