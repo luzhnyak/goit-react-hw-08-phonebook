@@ -47,6 +47,7 @@ export const authApi = createApi({
           method: 'POST',
         };
       },
+      invalidatesTags: ['User'],
     }),
   }),
 });

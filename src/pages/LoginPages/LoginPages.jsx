@@ -17,6 +17,7 @@ const LoginPages = () => {
   const handleSubmit = async values => {
     try {
       const { data } = await login(values);
+
       const credentials = {
         name: data.user.name,
         token: data.token,
