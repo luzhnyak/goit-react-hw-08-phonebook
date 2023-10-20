@@ -45,7 +45,7 @@ const UserMenu = () => {
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title={name}>
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt={name} src="/static/images/avatar/2.jpg" />
+          <Avatar alt={name} src="/static/images/avatar/1.jpg" />
         </IconButton>
       </Tooltip>
       <Menu
