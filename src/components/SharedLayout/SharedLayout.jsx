@@ -1,6 +1,6 @@
 import { Container } from '@mui/material';
 import ResponsiveAppBar from 'components/AppBar/AppBar';
-import { Loader } from 'components/Loader/Loader';
+import { Loader } from 'components/Loader';
 import { Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { useSelector } from 'react-redux';

@@ -1,4 +1,9 @@
 import * as React from 'react';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from 'redux/selectors';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,16 +15,15 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import ContactsIcon from '@mui/icons-material/Contacts';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { getUser } from 'redux/selectors';
 
 import UserMenu from 'components/AppBar/UserMenu';
+import { setOpenModal } from 'redux/modalSlice';
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
 
   const { name, isLoggedIn } = useSelector(getUser);
+  const dispatch = useDispatch();
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
@@ -27,6 +31,11 @@ function ResponsiveAppBar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleOpenModal = () => {
+    console.log('openModal');
+    dispatch(setOpenModal(true));
   };
 
   return (
@@ -113,7 +122,7 @@ function ResponsiveAppBar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {!isLoggedIn && (
+            {!isLoggedIn ? (
               <>
                 <Button
                   to="login"
@@ -130,6 +139,13 @@ function ResponsiveAppBar() {
                   Register
                 </Button>
               </>
+            ) : (
+              <Button
+                sx={{ my: 2, color: 'white', display: 'block' }}
+                onClick={handleOpenModal}
+              >
+                Add
+              </Button>
             )}
           </Box>
 

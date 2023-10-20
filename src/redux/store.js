@@ -13,11 +13,13 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { modalReducer } from './modalSlice';
 
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
     filter: filterReducer,
+    openModal: modalReducer,
     [authApi.reducerPath]: authApi.reducer,
     [contactsApi.reducerPath]: contactsApi.reducer,
   },

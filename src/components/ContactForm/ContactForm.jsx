@@ -7,20 +7,26 @@ import SaveIco from '@mui/icons-material/Save';
 // import { addContact } from 'redux/operations';
 // import { getContacts } from 'redux/selectors';
 // import toast from 'react-hot-toast';
-import { useAddContactMutation } from 'redux/contactsAPI';
+import { useAddContactMutation, useGetContactsQuery } from 'redux/contactsAPI';
 import { LoadingButton } from '@mui/lab';
 import { Box, TextField } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { setOpenModal } from 'redux/modalSlice';
+import toast from 'react-hot-toast';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const { data: contacts } = useGetContactsQuery();
+
+  const dispatch = useDispatch();
 
   // const contacts = useSelector(getContacts);
   const [addContact, addInfo] = useAddContactMutation();
 
-  // const isNameHas = name => {
-  //   return contacts.some(contact => contact.name === name);
-  // };
+  const isNameHas = name => {
+    return contacts.some(contact => contact.name === name);
+  };
 
   const handleChange = ({ name, value }) => {
     switch (name) {
@@ -45,14 +51,15 @@ export const ContactForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    // if (isNameHas(name)) {
-    //   toast.error(`${name} is already in contacts.`);
-    //   return;
-    // }
+    if (isNameHas(name)) {
+      toast.error(`${name} is already in contacts.`);
+      return;
+    }
 
     addContact({ name, number });
 
     reset();
+    dispatch(setOpenModal(false));
   };
 
   return (
@@ -88,12 +95,12 @@ export const ContactForm = () => {
 
         <LoadingButton
           variant="contained"
-          margin="normal"
           type="submit"
           color="success"
           loading={addInfo.isLoading}
           loadingPosition="end"
           endIcon={<SaveIco />}
+          sx={{ marginTop: '16px', marginLeft: 'auto' }}
         >
           Add contact
         </LoadingButton>

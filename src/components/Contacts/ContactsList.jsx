@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 // import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import { Filter } from 'components/Filter/Filter';
-import { Loader } from 'components/Loader/Loader';
+import { Loader } from 'components/Loader';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
