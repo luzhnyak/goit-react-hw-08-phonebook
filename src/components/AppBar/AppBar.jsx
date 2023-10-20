@@ -34,6 +34,7 @@ function ResponsiveAppBar() {
   };
 
   const handleOpenModal = () => {
+    setAnchorElNav(null);
     dispatch(setOpenModal(true));
   };
 
@@ -60,45 +61,53 @@ function ResponsiveAppBar() {
             PhoneBook
           </Typography>
 
-          {!isLoggedIn && (
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {' '}
+              {!isLoggedIn && (
                 <MenuItem component={NavLink} to="login">
                   <Typography textAlign="center">Login</Typography>
                 </MenuItem>
+              )}
+              {!isLoggedIn && (
                 <MenuItem component={NavLink} to="register">
                   <Typography textAlign="center">Register</Typography>
                 </MenuItem>
-              </Menu>
-            </Box>
-          )}
+              )}
+              {isLoggedIn && (
+                <MenuItem component="button" onClick={handleOpenModal}>
+                  <Typography textAlign="center">Add</Typography>
+                </MenuItem>
+              )}
+            </Menu>
+          </Box>
 
           <ContactsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
