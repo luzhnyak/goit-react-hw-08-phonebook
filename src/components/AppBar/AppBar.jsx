@@ -47,7 +47,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component={NavLink}
-            to="/"
+            to="/contacts"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -114,7 +114,7 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component={NavLink}
-            to="/"
+            to="/contacts"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },

@@ -5,7 +5,7 @@ import { ContactsList } from 'components/Contacts/ContactsList';
 import Modal from 'components/Modal/Modal';
 import AddFab from 'components/AppBar/AddFab';
 
-const HomePage = () => {
+const ContactsPage = () => {
   const { isLoggedIn } = useSelector(getUser);
 
   return (
@@ -17,4 +17,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default ContactsPage;

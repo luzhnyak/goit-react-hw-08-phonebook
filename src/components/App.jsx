@@ -1,5 +1,5 @@
 import { lazy, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useGetCurrentUserQuery } from 'redux/api';
@@ -10,7 +10,7 @@ import { SharedLayout } from './SharedLayout';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 
-const HomePage = lazy(() => import('pages/HomePages/HomePages'));
+const ContactsPage = lazy(() => import('pages/ContactsPages/ContactsPages'));
 const LoginPages = lazy(() => import('pages/LoginPages/LoginPages'));
 const RegisterPages = lazy(() => import('pages/RegisterPages/RegisterPages'));
 const NotFound = lazy(() => import('pages/NotFound/NotFound'));
@@ -56,22 +56,29 @@ export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
+        <Route index element={<Navigate to="/contacts" />} />
         <Route
-          index
+          path="contacts"
           element={
-            <PrivateRoute redirectTo="/login" component={<HomePage />} />
+            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
           }
         />
         <Route
           path="login"
           element={
-            <RestrictedRoute redirectTo="/" component={<LoginPages />} />
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<LoginPages />}
+            />
           }
         />
         <Route
           path="register"
           element={
-            <RestrictedRoute redirectTo="/" component={<RegisterPages />} />
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<RegisterPages />}
+            />
           }
         />
         <Route path="*" element={<NotFound />} />
