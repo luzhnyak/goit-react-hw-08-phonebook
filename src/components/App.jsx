@@ -16,8 +16,10 @@ const RegisterPages = lazy(() => import('pages/RegisterPages/RegisterPages'));
 const NotFound = lazy(() => import('pages/NotFound/NotFound'));
 
 export const App = () => {
-  const { token } = useSelector(getUser);
-  const user = useGetCurrentUserQuery(null, { skip: !Boolean(token) });
+  const { token, isLoggedIn } = useSelector(getUser);
+  const user = useGetCurrentUserQuery(null, {
+    skip: !Boolean(token && !isLoggedIn),
+  });
   const dispatch = useDispatch();
 
   useEffect(() => {
